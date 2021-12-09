@@ -11,7 +11,13 @@
             "luogo_rilascio": "Comune di Verona",
             "data_scadenza": "2022-11-10",
             "num_telefono": "3486062835",
-            "mail": "alessio.trentin3@gmail.com"
+            "mail": "alessio.trentin3@gmail.com",
+            "utente":  {
+                "mail": "alessio.trentin3@gmail.com",
+                "password": "r89fjfihfi0eri2oprji4r",
+                "genere": "M",
+                "data_nascita": "2001-11-10"
+            }
         },
 
         {
@@ -26,7 +32,13 @@
             "luogo_rilascio": "Comune di Vicenza",
             "data_scadenza": "2022-10-26",
             "num_telefono": "3432587631",
-            "mail": "giulia.grotto@gmail.com"
+            "mail": "giulia.grotto@gmail.com",
+            "utente":  {
+                "mail": "alessio.trentin3@gmail.com",
+                "password": "r89fjfihfi0eri2oprji4r",
+                "genere": "M",
+                "data_nascita": "2001-11-10"
+            }
         },
         {
             "nome": "Leonardo",
@@ -40,6 +52,12 @@
             "luogo_rilascio": "Comune di Lusiana-Conco",
             "data_scadenza": "2023-04-05",
             "num_telefono": "3849439242",
-            "mail": "leonardo.xillo@gmail.com"
+            "mail": "leonardo.xillo@gmail.com",
+            "utente":  {
+                "mail": "leonardo.xillo@gmail.com",
+                "password": "r89fjfihfi0eri2oprji4r",
+                "genere": "M",
+                "data_nascita": "2000-04-05"
+            }
         }
     ]
