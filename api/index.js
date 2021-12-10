@@ -47,9 +47,6 @@ var listener = app.listen(8080, () => {
  *              content:
  *                  application/json:
  *                      schema:
- *                          type: object
- *                          properties:
- *                          voli:
  *                              type: array
  *                              items:
  *                                  type: object
@@ -93,7 +90,17 @@ var listener = app.listen(8080, () => {
  */ 
 app.get('/api/ricercavoli', (request, response) => {
 
-     //invio richiesta a SkyScanner
+    //recupero parametri
+    var aeroporto_partenza = request.query.aeroportoPartenza;
+    var aeroporto_arrivo = request.query.aeroportoArrivo;
+    var data_partenza = request.query.dataPartenza;
+    var data_ritorno = request.query.dataRitorno;
+    var num_neonati = request.query.numNeonati;
+    var num_bambini = request.query.numBambini;
+    var num_adulti = request.query.numAdulti;
+    var classe = request.query.classe;
+
+    //invio richiesta a SkyScanner
 
     var fs = require('fs');
     var fileContents = fs.readFileSync('listavoli.json', 'utf8');
@@ -110,6 +117,24 @@ app.get('/api/ricercavoli', (request, response) => {
     //risposta SkyScanner
 
 })
+/** 
+app.get('/api/ricercavoli/{code}', (request, response) => {
+
+    //invio richiesta a SkyScanner
+
+    var fs = require('fs');
+    var fileContents = fs.readFileSync('listavoli.json', 'utf8');
+
+    try {
+        var data = JSON.parse(fileContents)
+    
+    } catch(err) {
+        console.error(err);
+    }
+
+    //risposta SkyScanner
+
+}) */
 
 app.get('/api/passeggeri', (request, response) => {
 

@@ -24,13 +24,14 @@ var APP = {
                         var durata = voli[j].durata_volo;
                         var ora_partenza = voli[j].data_ora_partenza;
                         var codice = voli[j].codice;
+                        var compagnia_aerea = voli[j].compagnia_aerea;
                         var prenotazione = document.getElementById("volo" + i);
                         var contenuto = prenotazione.innerHTML;
                         prenotazione.innerHTML = contenuto + "<div class=\"d-flex w-100 justify-content-between\">" +
                         "<h5 class=\"mb-1\">" + aeroporto_partenza + " - " + aeroporto_arrivo + "</h5>" +
                         "<small>" + durata + "</small> </div>" + 
                         "<p class=\"mb-1\">" + ora_partenza + "</p>" + 
-                        "<small>" + codice + "</small> <br>";
+                        "<small>" + compagnia_aerea + " - " + codice + "</small> <br>";
                     }
                 }
 

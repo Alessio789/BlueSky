@@ -28,13 +28,13 @@
 
 <body>
 
-    <div class="container">
+    <div class="container" id="ricercaVoli">
 
         <p class="h1">Ricerca Volo</p>
 
-        <form>
+        <form id="formRicerca">
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="soloAndata">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="soloAndata" checked>
                 <label class="form-check-label" for="flexCheckDefault">
                     solo andata
                 </label>
@@ -45,70 +45,44 @@
                     andata e ritorno
                 </label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="destinazioniMultiple">
-                <label class="form-check-label" for="flexCheckChecked">
-                    destinazioni multiple
-                </label>
-            </div>
-
-            <div class="modal" tabindex="-1" id="modalDest">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Destinazioni Multiple</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      <p>Inserisci il numero di destinazioni</p>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-                      <button type="button" class="btn btn-primary">Ok</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            <div id="countDest"></div>
 
             <div id="formAndataRitorno">
-                <input class="form-control" type="text" placeholder="Aeroporto di partenza"
+                <input class="form-control" type="text" id="aeroportoPartenza" placeholder="Aeroporto di partenza"
                     aria-label="default input example">
-                <input class="form-control" type="text" placeholder="Aeroporto di arrivo"
+                <input class="form-control" type="text" id="aeroportoArrivo" placeholder="Aeroporto di arrivo"
                     aria-label="default input example">
 
                 <label class="form-check-label" for="dataPartenza">
                     Data partenza
                 </label>
-                <input class="form-control" type="date" name="dataPartenza" aria-label="default input example">
+                <input class="form-control" type="date" id="dataPartenza" name="dataPartenza" aria-label="default input example">
 
                 <div id="contDataRitorno" style="display: none">
                     <label class="form-check-label" for="dataPartenza">
                         Data ritorno
                     </label>
-                    <input class="form-control" type="date" name="dataPartenza" aria-label="default input example">
+                    <input class="form-control" type="date" id="dataRitorno" name="dataRitorno" aria-label="default input example">
                 </div>
 
                 <label class="form-check-label" for="numeroNeonati">
                     Numero neonati (0-2)
                 </label>
-                <input class="form-control" type="number" max="8" name="numeroNeonati"
-                    aria-label="default input example">
+                <input class="form-control" type="number" max="8" name="numeroNeonati" id="numNeonati"
+                    aria-label="default input example"  placeholder="0">
 
                 <label class="form-check-label" for="numeroBambini">
                     Numero bambini (3-17)
                 </label>
-                <input class="form-control" type="number" min="0" max="8" name="numeroBambini"
-                    aria-label="default input example">
+                <input class="form-control" type="number" min="0" max="8" name="numeroBambini" id="numBambini"
+                    aria-label="default input example"  placeholder="0">
 
                 <label class="form-check-label" for="numeroAdulti">
                     Numero adulti (18+)
                 </label>
-                <input class="form-control" type="number" max="8" name="numeroAdulti"
-                    aria-label="default input example">
+                <input class="form-control" type="number" max="8" name="numeroAdulti" id="numAdulti"
+                    aria-label="default input example" placeholder="0">
 
-                <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
+                <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example" id="classe">
                     <option selected>Economy</option>
                     <option value="Premium Economy">Premium Economy</option>
                     <option value="Business">Business</option>
@@ -116,8 +90,9 @@
                 </select>
 
             </div>
-            <input type="submit" class="btn btn-primary" value="Cerca">
+            <button type="button" id="inviaForm" class="btn btn-primary">Cerca</button>
         </form>
 
     </div>
+    <div class="container" id="risultatiRicerca"></div>
 </body>
