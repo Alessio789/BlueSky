@@ -12,6 +12,7 @@ const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUI = require('swagger-ui-express');
 const swaggerOptions = {
     swaggerDefinition: {
+        openapi: '3.0.0',
         info: {
             title: "BlueSky API",
             description: "BlueSky API information",
@@ -41,6 +42,55 @@ var listener = app.listen(8080, () => {
  *  get:
  *      summary: Restituisce una lista di voli.
  *      description: Restituisce una lista di voli in base ai parametri di ricerca passati.
+ *      parameters:
+ *        - in: query
+ *          name: aeroportoPartenza
+ *          required: true
+ *          schema:
+ *              type: string
+ *          description: L'aeroporto di partenza.
+ *        - in: query
+ *          name: aeroportoArrivo
+ *          required: true
+ *          schema:
+ *              type: string
+ *          description: L'aeroporto di arrivo.
+ *        - in: query
+ *          name: dataPartenza
+ *          required: true
+ *          schema:
+ *              type: string
+ *          description: La data e l'ora di partenza all'andata.
+ *        - in: query
+ *          name: dataRitorno
+ *          required: false
+ *          schema:
+ *              type: string
+ *          description: La data e l'ora di partenza al ritorno.
+ *        - in: query
+ *          name: numNeonati
+ *          required: false
+ *          schema:
+ *              type: string
+ *          description: Il numero di neonati (0-2 anni).
+ *        - in: query
+ *          name: numBambini
+ *          required: false
+ *          schema:
+ *              type: string
+ *          description: Il numero di bambini (3-17 anni).
+ *        - in: query
+ *          name: numAdulti
+ *          required: true
+ *          schema:
+ *              type: string
+ *          description: Il numero di adulti (18+ anni).
+ *        - in: query
+ *          name: classe
+ *          required: true
+ *          schema:
+ *              type: string
+ *          description: La classe di volo.
  *      responses:
  *          200:
  *              description: Una lista di voli.
