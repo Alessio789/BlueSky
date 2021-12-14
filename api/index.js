@@ -167,24 +167,6 @@ app.get('/api/ricercavoli', (request, response) => {
     //risposta SkyScanner
 
 })
-/** 
-app.get('/api/ricercavoli/{code}', (request, response) => {
-
-    //invio richiesta a SkyScanner
-
-    var fs = require('fs');
-    var fileContents = fs.readFileSync('listavoli.json', 'utf8');
-
-    try {
-        var data = JSON.parse(fileContents)
-    
-    } catch(err) {
-        console.error(err);
-    }
-
-    //risposta SkyScanner
-
-}) */
 
 app.get('/api/passeggeri', (request, response) => {
 
@@ -208,10 +190,6 @@ app.get('/api/passeggeri', (request, response) => {
     }
 
     response.send(out);
-})
-
-app.post('/api/voloselezionato', (request, response) => {
-
 })
 
 app.get("/api/prenotazioni", (request, response) => {
@@ -238,7 +216,7 @@ app.get("/api/prenotazioni", (request, response) => {
     response.send(out); 
 })
 
-app.post("/api/prenotazioni", (request, response) => {
+app.post("/api/prenotazione", (request, response) => {
 
 
 })

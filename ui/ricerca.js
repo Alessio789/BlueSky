@@ -41,6 +41,7 @@ var APP = {
                     var testo = cont.innerHTML;
                     cont.innerHTML = testo + "<a href=\"#\" id=\"volo" + i + "\" class=\"list-group-item list-group-item-action\" aria-current=\"true\"> </a>";
 
+                    var num_passeggeri = num_adulti + num_bambini + num_neonati;
                     var aeroporto_partenza = voli[i].aeroporto_partenza;
                     var aeroporto_arrivo = voli[i].aeroporto_arrivo;
                     var durata = voli[i].durata_volo;
@@ -54,9 +55,7 @@ var APP = {
                         "<small>" + durata + " minuti </small> </div>" +
                         "<p class=\"mb-1\">" + ora_partenza + "<br> Peso massimo bagaglio: " + peso_max_bagaglio + "</p>" +
                         "<small>" + compagnia_aerea + " - " + codice + "</small> <br>" +
-                        "<button type=\"button\" id=\"button" + code + "\" class=\"btn btn-primary\">Prenota</button>";
-                    
-                    $("#button" + code).on("click", APP.prentazione);
+                        "<a role=\"button\" class=\"btn btn-primary\" href=\"prenota.html?code=" + codice + "&n=" + num_passeggeri + "\">Prenota</a>";
                 }
 
 
