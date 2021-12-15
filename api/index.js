@@ -168,6 +168,90 @@ app.get('/api/ricercavoli', (request, response) => {
 
 })
 
+/** 
+ * @swagger
+ * api/passeggeri/:
+ *  get:
+ *      summary: Restituisce una lista di passeggeri.
+ *      description: Restituisce la lista di passeggeri salvati dall'utente in precedenti prenotazioni.
+ *      responses:
+ *          200:
+ *              description: Una lista di passeggeri.
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                              type: array
+ *                              items:
+ *                                  type: object
+ *                                  properties:
+ *                                      nome:
+ *                                          type: string
+ *                                          description: nome del passeggero
+ *                                          example: Alessio
+ *                                      cognome:
+ *                                          type: string
+ *                                          description: cognome del passeggero
+ *                                          example: Trentin
+ *                                      data_nascita:
+ *                                          type: string
+ *                                          description: data di nascita del passeggero
+ *                                          example: 2001-11-10
+ *                                      documento:
+ *                                          type: string
+ *                                          description: blob del documento di riconoscimento del passeggero
+ *                                          example: cbhsbkajkdcjcnlscndknsdkcb
+ *                                      tipo_documento:
+ *                                          type: string
+ *                                          description: tipo del documento di riconoscimento del passeggero
+ *                                          example: ID Card
+ *                                      num_documento:
+ *                                          type: string
+ *                                          description: numero del documento di riconoscimento del passeggero
+ *                                          example: AB1234CA
+ *                                      paese:
+ *                                          type: string
+ *                                          description: paese di rilascio del documento del passeggero
+ *                                          example: Italia
+ *                                      data_rilascio:
+ *                                          type: string
+ *                                          description: data di rilascio del documento di riconoscimento del passeggero
+ *                                          example: Alessio
+ *                                      luogo_rilascio:
+ *                                          type: string
+ *                                          description: luogo di rilascio del documento di riconoscimento del passeggero
+ *                                          example: Comune di Verona
+ *                                      data_scadenza:
+ *                                          type: string
+ *                                          description: data di scadenza del documento di riconoscimento del passeggero
+ *                                          example: 2022-11-10
+ *                                      num_telefono:
+ *                                          type: string
+ *                                          description: numero di telefono del passeggero
+ *                                          example: 3426178263
+ *                                      mail:
+ *                                          type: string
+ *                                          description: e-mail del passeggero
+ *                                          example: alessio.trentin5@gmail.com
+ *                                      utente:
+ *                                          type: object
+ *                                          properties:
+ *                                              mail:
+ *                                                  type: string
+ *                                                  description: e-mail dell'utente che effettua la prenotazione
+ *                                                  example: alessio.trentin3@gmail.com
+ *                                              password:
+ *                                                  type: string
+ *                                                  description: password dell'utente che effettua la prenotazione
+ *                                                  example: cdj!ndkA
+ *                                              genere:
+ *                                                  type: string
+ *                                                  description: genere dell'utente che effttua la prenotazione
+ *                                                  example: M
+ *                                              data_nascita:
+ *                                                  type: string
+ *                                                  description: data di nascita dell'utente che effettua la prenotazione
+ *                                                  example: 2001-11-10                          
+ */
 app.get('/api/passeggeri', (request, response) => {
 
     const fs = require('fs');
@@ -192,6 +276,159 @@ app.get('/api/passeggeri', (request, response) => {
     response.send(out);
 })
 
+/** 
+ * @swagger
+ * api/prenotazioni/:
+ *  get:
+ *      summary: Restituisce una lista di prenotazioni.
+ *      description: Restituisce la lista di prenotazioni effttuate dall'utente in precedenza.
+ *      responses:
+ *          200:
+ *              description: Una lista di prentazioni.
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                              type: array
+ *                              items:
+ *                                  type: object
+ *                                  properties:
+ *                                      voli:
+ *                                          type: array
+ *                                          items:
+ *                                              type: object
+ *                                              properties: 
+ *                                                  codice:
+ *                                                      type: string
+ *                                                      description: codice del volo
+ *                                                      example: FR2431
+ *                                                  data_ora_partenza:
+ *                                                      type: string
+ *                                                      description: data e ora di partenza del volo
+ *                                                      example: 2021-12-25 23:59:59
+ *                                                  data_ora_arrivo:
+ *                                                      type: string
+ *                                                      description: data e ora di arrivo del volo
+ *                                                      example: 2021-12-25 01:10:59
+ *                                                  aeroporto_partenza:
+ *                                                      type: string
+ *                                                      description: codice dell'aeroporto di partenza
+ *                                                      example: MXP
+ *                                                  aeroporto_arrivo:
+ *                                                      type: string
+ *                                                      description: codice dell'aeroporto di arrivo
+ *                                                      example: CDG
+ *                                                  compagnia_aerea:
+ *                                                      type: string
+ *                                                      description: compagnia aerea del volo
+ *                                                      example: Air France
+ *                                                  durata_volo:
+ *                                                      type: number
+ *                                                      description: durata del volo
+ *                                                      example: 120
+ *                                                  pasto:
+ *                                                      type: boolean
+ *                                                      description: presenza o no del pasto
+ *                                                      example: False
+ *                                                  peso_max_bagaglio:
+ *                                                      type: number
+ *                                                      description: peso massimo del bagaglio nel volo
+ *                                                      example: 25
+ *                                      passeggeri:
+ *                                          type: array
+ *                                          items:
+ *                                              type: object
+ *                                              properties:
+ *                                                  nome:
+ *                                                      type: string
+ *                                                      description: nome del passeggero
+ *                                                      example: Alessio
+ *                                                  cognome:
+ *                                                      type: string
+ *                                                      description: cognome del passeggero
+ *                                                      example: Trentin
+ *                                                  data_nascita:
+ *                                                      type: string
+ *                                                      description: data di nascita del passeggero
+ *                                                      example: 2001-11-10
+ *                                                  documento:
+ *                                                      type: string
+ *                                                      description: blob del documento di riconoscimento del passeggero
+ *                                                      example: cbhsbkajkdcjcnlscndknsdkcb
+ *                                                  tipo_documento:
+ *                                                      type: string
+ *                                                      description: tipo del documento di riconoscimento del passeggero
+ *                                                      example: ID Card
+ *                                                  num_documento:
+ *                                                      type: string
+ *                                                      description: numero del documento di riconoscimento del passeggero
+ *                                                      example: AB1234CA
+ *                                                  paese:
+ *                                                      type: string
+ *                                                      description: paese di rilascio del documento del passeggero
+ *                                                      example: Italia
+ *                                                  data_rilascio:
+ *                                                      type: string
+ *                                                      description: data di rilascio del documento di riconoscimento del passeggero
+ *                                                      example: Alessio
+ *                                                  luogo_rilascio:
+ *                                                      type: string
+ *                                                      description: luogo di rilascio del documento di riconoscimento del passeggero
+ *                                                      example: Comune di Verona
+ *                                                  data_scadenza:
+ *                                                      type: string
+ *                                                      description: data di scadenza del documento di riconoscimento del passeggero
+ *                                                      example: 2022-11-10
+ *                                                  num_telefono:
+ *                                                      type: string
+ *                                                      description: numero di telefono del passeggero
+ *                                                      example: 3426178263
+ *                                                  mail:
+ *                                                      type: string
+ *                                                      description: e-mail del passeggero
+ *                                                      example: alessio.trentin5@gmail.com
+ *                                                  utente:
+ *                                                      type: object
+ *                                                      properties:
+ *                                                          mail:
+ *                                                              type: string
+ *                                                              description: e-mail dell'utente che effettua la prenotazione
+ *                                                              example: alessio.trentin3@gmail.com
+ *                                                          password:
+ *                                                              type: string
+ *                                                              description: password dell'utente che effettua la prenotazione
+ *                                                              example: cdj!ndkA
+ *                                                          genere:
+ *                                                              type: string
+ *                                                              description: genere dell'utente che effttua la prenotazione
+ *                                                              example: M
+ *                                                          data_nascita:
+ *                                                              type: string
+ *                                                              description: data di nascita dell'utente che effettua la prenotazione
+ *                                                              example: 2001-11-10
+ *                                      utente:
+ *                                          type: object
+ *                                          properties:
+ *                                              mail:
+ *                                                  type: string
+ *                                                  description: e-mail dell'utente che effettua la prenotazione
+ *                                                  example: alessio.trentin3@gmail.com
+ *                                              password:
+ *                                                  type: string
+ *                                                  description: password dell'utente che effettua la prenotazione
+ *                                                  example: cdj!ndkA
+ *                                              genere:
+ *                                                  type: string
+ *                                                  description: genere dell'utente che effttua la prenotazione
+ *                                                  example: M
+ *                                              data_nascita:
+ *                                                  type: string
+ *                                                  description: data di nascita dell'utente che effettua la prenotazione
+ *                                                  example: 2001-11-10
+ *                                      prezzo:
+ *                                          type: number
+ *                                          description: prezzo dei biglietti prenotati
+ *                                          example: 220       
+ */
 app.get("/api/prenotazioni", (request, response) => {
 
     const fs = require('fs');
@@ -216,6 +453,162 @@ app.get("/api/prenotazioni", (request, response) => {
     response.send(out); 
 })
 
+/**
+ * @swagger
+ * /api/prenotazione/:
+ *  post:
+ *      summary: Salvataggio di una prenotazione.
+ *      description: Permette di salvare una prenotazione nel database.
+ *      requestBody: 
+ *          description: dati della prenotazione
+ *          required: true
+ *          content: 
+ *              application/json:
+ *                  schema: 
+ *                      type: array
+ *                      items:
+ *                          type: object
+ *                          properties:
+ *                              voli:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ *                                      properties: 
+ *                                          codice:
+ *                                              type: string
+ *                                              description: codice del volo
+ *                                              example: FR2431
+ *                                          data_ora_partenza:
+ *                                              type: string
+ *                                              description: data e ora di partenza del volo
+ *                                              example: 2021-12-25 23:59:59
+ *                                          data_ora_arrivo:
+ *                                              type: string
+ *                                              description: data e ora di arrivo del volo
+ *                                              example: 2021-12-25 01:10:59
+ *                                          aeroporto_partenza:
+ *                                              type: string
+ *                                              description: codice dell'aeroporto di partenza
+ *                                              example: MXP
+ *                                          aeroporto_arrivo:
+ *                                              type: string
+ *                                              description: codice dell'aeroporto di arrivo
+ *                                              example: CDG
+ *                                          compagnia_aerea:
+ *                                              type: string
+ *                                              description: compagnia aerea del volo
+ *                                              example: Air France
+ *                                          durata_volo:
+ *                                              type: number
+ *                                              description: durata del volo
+ *                                              example: 120
+ *                                          pasto:
+ *                                              type: boolean
+ *                                              description: presenza o no del pasto
+ *                                              example: False
+ *                                          peso_max_bagaglio:
+ *                                              type: number
+ *                                              description: peso massimo del bagaglio nel volo
+ *                                              example: 25
+ *                              passeggeri:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ *                                      properties:
+ *                                          nome:
+ *                                              type: string
+ *                                              description: nome del passeggero
+ *                                              example: Alessio
+ *                                          cognome:
+ *                                              type: string
+ *                                              description: cognome del passeggero
+ *                                              example: Trentin
+ *                                          data_nascita:
+ *                                              type: string
+ *                                              description: data di nascita del passeggero
+ *                                              example: 2001-11-10
+ *                                          documento:
+ *                                              type: string
+ *                                              description: blob del documento di riconoscimento del passeggero
+ *                                              example: cbhsbkajkdcjcnlscndknsdkcb
+ *                                          tipo_documento:
+ *                                              type: string
+ *                                              description: tipo del documento di riconoscimento del passeggero
+ *                                              example: ID Card
+ *                                          num_documento:
+ *                                              type: string
+ *                                              description: numero del documento di riconoscimento del passeggero
+ *                                              example: AB1234CA
+ *                                          paese:
+ *                                              type: string
+ *                                              description: paese di rilascio del documento del passeggero
+ *                                              example: Italia
+ *                                          data_rilascio:
+ *                                              type: string
+ *                                              description: data di rilascio del documento di riconoscimento del passeggero
+ *                                              example: Alessio
+ *                                          luogo_rilascio:
+ *                                              type: string
+ *                                              description: luogo di rilascio del documento di riconoscimento del passeggero
+ *                                              example: Comune di Verona
+ *                                          data_scadenza:
+ *                                              type: string
+ *                                              description: data di scadenza del documento di riconoscimento del passeggero
+ *                                              example: 2022-11-10
+ *                                          num_telefono:
+ *                                              type: string
+ *                                              description: numero di telefono del passeggero
+ *                                              example: 3426178263
+ *                                          mail:
+ *                                              type: string
+ *                                              description: e-mail del passeggero
+ *                                              example: alessio.trentin5@gmail.com
+ *                                          utente:
+ *                                              type: object
+ *                                              properties:
+ *                                                  mail:
+ *                                                      type: string
+ *                                                      description: e-mail dell'utente che effettua la prenotazione
+ *                                                      example: alessio.trentin3@gmail.com
+ *                                                  password:
+ *                                                      type: string
+ *                                                      description: password dell'utente che effettua la prenotazione
+ *                                                      example: cdj!ndkA
+ *                                                  genere:
+ *                                                      type: string
+ *                                                      description: genere dell'utente che effttua la prenotazione
+ *                                                      example: M
+ *                                                  data_nascita:
+ *                                                      type: string
+ *                                                      description: data di nascita dell'utente che effettua la prenotazione
+ *                                                      example: 2001-11-10
+ *                              utente:
+ *                                  type: object
+ *                                  properties:
+ *                                      mail:
+ *                                          type: string
+ *                                          description: e-mail dell'utente che effettua la prenotazione
+ *                                          example: alessio.trentin3@gmail.com
+ *                                      password:
+ *                                          type: string
+ *                                          description: password dell'utente che effettua la prenotazione
+ *                                          example: cdj!ndkA
+ *                                      genere:
+ *                                          type: string
+ *                                          description: genere dell'utente che effttua la prenotazione
+ *                                          example: M
+ *                                      data_nascita:
+ *                                          type: string
+ *                                          description: data di nascita dell'utente che effettua la prenotazione
+ *                                          example: 2001-11-10
+ *                              prezzo:
+ *                                  type: number
+ *                                  description: prezzo dei biglietti prenotati
+ *                                  example: 220
+ *      responses:
+ *          201:
+ *              description: Created
+ */
 app.post("/api/prenotazione", (request, response) => {
 
     const fs = require('fs');
