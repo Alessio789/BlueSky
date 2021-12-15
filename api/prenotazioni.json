@@ -79,7 +79,7 @@
     {
         "voli": [
             {
-                "codice" : "afw134",
+                "codice": "afw134",
                 "data_ora_partenza": "2022-03-11 13:30:01",
                 "data_ora_arrivo": "2022-03-11 16:00:02",
                 "aeroporto_partenza": "TFS",
@@ -90,7 +90,7 @@
                 "peso_max_bagaglio": 12
             },
             {
-                "codice" : "afw134",
+                "codice": "afw134",
                 "data_ora_partenza": "2022-03-16 13:30:01",
                 "data_ora_arrivo": "2022-03-16 16:00:02",
                 "aeroporto_partenza": "BUD",
@@ -152,5 +152,42 @@
             "data_nascita": "2000-10-26"
         },
         "prezzo": 220
+    },
+    {
+        "voli": [
+            {
+                "codice": "akd234",
+                "data_ora_partenza": "2021-12-25 23:59:59",
+                "data_ora_arrivo": "2021-12-26 01:29:02",
+                "aeroporto_partenza": "MPX",
+                "aeroporto_arrivo": "CDG",
+                "compagnia_aerea": "Air France",
+                "pasto": false,
+                "peso_max_bagaglio": 43
+            }
+        ],
+        "passeggeri": [
+            {
+                "nome": "Alessio",
+                "cognome": "Trentin",
+                "data_nascita": "2001-11-10",
+                "documento": "fhsfhjsdasldwdfusdfio242345dssdg",
+                "tipo_documento": "ID Card",
+                "num_documento": "AB1234BA",
+                "paese": "Italia",
+                "data_rilascio": "2016-12-29",
+                "luogo_rilascio": "Comune di Verona",
+                "data_scadenza": "2001-11-10",
+                "num_telefono": "393034034",
+                "mail": "alessio.trentin@gmail.com"
+            }
+        ],
+        "utente": {
+            "mail": "alessio.trentin3@gmail.com",
+            "password": "r89fjfihfi0eri2oprji4r",
+            "genere": "M",
+            "data_nascita": "2001-11-10"
+        },
+        "prezzo": 230
     }
 ]

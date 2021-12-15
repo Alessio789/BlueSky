@@ -170,7 +170,7 @@ app.get('/api/ricercavoli', (request, response) => {
 
 app.get('/api/passeggeri', (request, response) => {
 
-    var fs = require('fs');
+    const fs = require('fs');
     var fileContents = fs.readFileSync('passeggeri.json', 'utf8');
 
     try {
@@ -194,7 +194,7 @@ app.get('/api/passeggeri', (request, response) => {
 
 app.get("/api/prenotazioni", (request, response) => {
 
-    var fs = require('fs');
+    const fs = require('fs');
     var fileContents = fs.readFileSync('prenotazioni.json', 'utf8');
 
     try {
@@ -218,5 +218,44 @@ app.get("/api/prenotazioni", (request, response) => {
 
 app.post("/api/prenotazione", (request, response) => {
 
+    const fs = require('fs');
+    var file_voli = fs.readFileSync('listavoli.json', 'utf8');
+
+    var lista_voli = JSON.parse(file_voli);
+
+    console.log(request.body);
+    var prenotazione = request.body;
+    console.log(prenotazione.voli.length)
+
+    for (let i = 0; i < prenotazione.voli.length; i++) {
+        var codice = prenotazione.voli[i].codice;
+        for (let j = 0; j < lista_voli.length; j++) {
+            if (lista_voli[j].codice == codice) {
+                prenotazione.voli[i]["data_ora_partenza"] = lista_voli[j].data_ora_partenza;
+                prenotazione.voli[i]["data_ora_arrivo"] = lista_voli[j].data_ora_arrivo;
+                prenotazione.voli[i]["aeroporto_partenza"] = lista_voli[j].aeroporto_partenza;
+                prenotazione.voli[i]["aeroporto_arrivo"] = lista_voli[j].aeroporto_arrivo;
+                prenotazione.voli[i]["compagnia_aerea"] = lista_voli[j].compagnia_aerea;
+                prenotazione.voli[i]["pasto"] = lista_voli[j].pasto;
+                prenotazione.voli[i]["peso_max_bagaglio"] = lista_voli[j].peso_max_bagaglio;
+                break;
+            } 
+        }
+    }
+
+    console.log(prenotazione);
+    var in_prenotazioni = fs.readFileSync('prenotazioni.json', 'utf8');
+    var lista_prenotazioni = JSON.parse(in_prenotazioni);
+    lista_prenotazioni.push(prenotazione);
+
+    var output = JSON.stringify(lista_prenotazioni);
+
+    fs.writeFileSync('prenotazioni.json', output, 'utf8', function(err) {
+        if (err) throw err;
+        console.log('complete');
+        });
+
+    response.status(201);
+    response.json("Added Successfully");
 
 })

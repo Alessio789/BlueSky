@@ -33,7 +33,7 @@ var APP = {
     },
 
     invia_form : function() {
-        var form = document.getElementById('formRicerca');
+        var form = document.getElementById('formPrenotazione');
 
         const urlParams = new URLSearchParams(window.location.search);
         var code = urlParams.get("code");
@@ -42,18 +42,18 @@ var APP = {
         var passeggeri = [];
         for (let i = 0; i < num_passeggeri; i++) {
             var passeggero = {
-                    "nome": form.elements['nome'].value,
-                    "cognome": form.elements['cognome'].value,
-                    "data_nascita": form.elements['dataNascita'].value,
+                    "nome": form.elements['nome' + i].value,
+                    "cognome": form.elements['cognome' + i].value,
+                    "data_nascita": form.elements['dataNascita' + i].value,
                     "documento": "fhsfhjsdasldwdfusdfio242345dssdg",
-                    "tipo_documento": form.elements['tipoDocumento'].value,
-                    "num_documento": form.elements['numDocumento'].value,
-                    "paese": form.elements['paese'].value,
-                    "data_rilascio": form.elements['data_rilascio'].value,
-                    "luogo_rilascio": form.elements['luogo_rilascio'].value,
-                    "data_scadenza": form.elements['dataNascita'].value,
-                    "num_telefono": form.element['numTelefono'].value,
-                    "mail": form.element['mail'].value
+                    "tipo_documento": form.elements['tipoDocumento' + i].value,
+                    "num_documento": form.elements['numDocumento' + i].value,
+                    "paese": form.elements['paese' + i].value,
+                    "data_rilascio": form.elements['dataRilascio' + i].value,
+                    "luogo_rilascio": form.elements['luogoRilascio' + i].value,
+                    "data_scadenza": form.elements['dataNascita' + i].value,
+                    "num_telefono": form.elements['numeroTelefono' + i].value,
+                    "mail": form.elements['mail' + i].value
             }
             passeggeri.push(passeggero);
         }
