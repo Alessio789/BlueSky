@@ -36,6 +36,8 @@ var listener = app.listen(8080, () => {
     console.log('Listening on port ' + listener.address().port);
 });
 
+module.exports = listener;
+
 /**
  * @swagger
  * /api/ricercavoli:
@@ -157,7 +159,6 @@ app.get('/api/ricercavoli', (request, response) => {
 
     try {
         var data = JSON.parse(fileContents)
-        console.log(data);
         response.send(data);
 
     } catch(err) {
@@ -170,10 +171,14 @@ app.get('/api/ricercavoli', (request, response) => {
 
 /** 
  * @swagger
- * api/passeggeri/:
+ * /api/passeggeri:
  *  get:
  *      summary: Restituisce una lista di passeggeri.
  *      description: Restituisce la lista di passeggeri salvati dall'utente in precedenti prenotazioni.
+ *      parameters:
+ *        - in: query
+ *          name: utente
+ *          required: true
  *      responses:
  *          200:
  *              description: Una lista di passeggeri.
@@ -259,8 +264,6 @@ app.get('/api/passeggeri', (request, response) => {
 
     try {
         var data = JSON.parse(fileContents)
-        console.log(data);
-
     } catch(err) {
         console.error(err);
     }
@@ -278,10 +281,14 @@ app.get('/api/passeggeri', (request, response) => {
 
 /** 
  * @swagger
- * api/prenotazioni/:
+ * /api/prenotazioni:
  *  get:
  *      summary: Restituisce una lista di prenotazioni.
  *      description: Restituisce la lista di prenotazioni effttuate dall'utente in precedenza.
+ *      parameters:
+ *        - in: query
+ *          name: utente
+ *          required: true
  *      responses:
  *          200:
  *              description: Una lista di prentazioni.
@@ -289,7 +296,7 @@ app.get('/api/passeggeri', (request, response) => {
  *                  application/json:
  *                      schema:
  *                              type: array
- *                              items:
+ *                              items: 
  *                                  type: object
  *                                  properties:
  *                                      voli:
@@ -427,7 +434,11 @@ app.get('/api/passeggeri', (request, response) => {
  *                                      prezzo:
  *                                          type: number
  *                                          description: prezzo dei biglietti prenotati
- *                                          example: 220       
+ *                                          example: 220
+ *                                      cod_prenotazione:
+ *                                          type: number
+ *                                          description: codice della prenotazione
+ *                                          example: 99812       
  */
 app.get("/api/prenotazioni", (request, response) => {
 
@@ -436,7 +447,6 @@ app.get("/api/prenotazioni", (request, response) => {
 
     try {
         var data = JSON.parse(fileContents)
-        console.log(data);
 
     } catch(err) {
         console.error(err);
@@ -455,7 +465,7 @@ app.get("/api/prenotazioni", (request, response) => {
 
 /**
  * @swagger
- * /api/prenotazione/:
+ * /api/prenotazione:
  *  post:
  *      summary: Salvataggio di una prenotazione.
  *      description: Permette di salvare una prenotazione nel database.
@@ -615,10 +625,7 @@ app.post("/api/prenotazione", (request, response) => {
     var file_voli = fs.readFileSync('listavoli.json', 'utf8');
 
     var lista_voli = JSON.parse(file_voli);
-
-    console.log(request.body);
     var prenotazione = request.body;
-    console.log(prenotazione.voli.length)
 
     for (let i = 0; i < prenotazione.voli.length; i++) {
         var codice = prenotazione.voli[i].codice;
@@ -636,19 +643,37 @@ app.post("/api/prenotazione", (request, response) => {
         }
     }
 
-    console.log(prenotazione);
     var in_prenotazioni = fs.readFileSync('prenotazioni.json', 'utf8');
     var lista_prenotazioni = JSON.parse(in_prenotazioni);
+
+    var cod_prenotazione = lista_prenotazioni[lista_prenotazioni.length - 1].cod_prenotazione + 1;
+    prenotazione["cod_prenotazione"] = cod_prenotazione;
     lista_prenotazioni.push(prenotazione);
 
     var output = JSON.stringify(lista_prenotazioni);
 
-    fs.writeFileSync('prenotazioni.json', output, 'utf8', function(err) {
-        if (err) throw err;
-        console.log('complete');
-        });
+    fs.writeFileSync('prenotazioni.json', output, 'utf8');
 
     response.status(201);
     response.json("Added Successfully");
 
 })
+
+app.delete("/api/prenotazione/:codice", (request, response) => {
+    console.log("eliminazione");
+    const fs = require('fs');
+    var file_prenotazioni = fs.readFileSync('prenotazioni.json', 'utf8');
+    var prenotazioni = file_prenotazioni;
+
+    for (let [i, prenotazione] of prenotazioni) {
+
+        if (prenotazione.codice == request.params.codice) {
+            prenotazioni.splice(i, 1);
+        }
+    }
+    var newData = JSON.stringify(prenotazioni);
+    fs.writeFile('prodotti.json', newData, err => {
+        if (err) throw err;
+    });
+    response.json("Prenotazione cancellata correttamente: " + prenotazioni.length);
+}) 
