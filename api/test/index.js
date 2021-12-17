@@ -148,3 +148,19 @@ test('TEST4: Prenotazione aggiunta correttamente', function (assert) {
             assert.end();
         });
 });
+
+test('TEST5: Prenotazione cancellata correttamente', function (assert) {
+    request(app)
+        .del('/api/prenotazione/3')
+        .expect("Content-Type", /json/)
+        .end(function (err, res) {
+            
+            if (err) {
+                reject(new Error('Error: ' + err))
+            }
+
+            assert.error(err, 'No error');
+            assert.isEqual("Prenotazione cancellata correttamente!", res.body, 'Prenotazione cancellata correttamente');
+            assert.end();
+        });
+});

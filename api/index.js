@@ -659,21 +659,41 @@ app.post("/api/prenotazione", (request, response) => {
 
 })
 
+/**
+ * @swagger
+ * /api/prodotti/{codice}:
+ *   delete:
+ *     summary: Cancella una prenotazione.
+ *     description: Cancella una prenotazione in base al codice passato come parametro.
+ *     parameters:
+ *       - in: path
+ *         name: codice
+ *         schema:
+ *             type: string
+ *         required: true
+ *         description: il codice della prenotazione
+ *     responses:
+ *       200:
+ *         description: la prenotazione è stata cancellata
+ *       404:
+ *         description: la prenotazione non è stata trovata
+*/
 app.delete("/api/prenotazione/:codice", (request, response) => {
-    console.log("eliminazione");
     const fs = require('fs');
     var file_prenotazioni = fs.readFileSync('prenotazioni.json', 'utf8');
-    var prenotazioni = file_prenotazioni;
+    var prenotazioni = JSON.parse(file_prenotazioni);
+    var codice = parseInt(request.params.codice);
+    var new_data = [];
 
-    for (let [i, prenotazione] of prenotazioni) {
-
-        if (prenotazione.codice == request.params.codice) {
-            prenotazioni.splice(i, 1);
+    for (let i = 0; i < prenotazioni.length; i++) {
+        var cod_prenotazione = parseInt(prenotazioni[i].cod_prenotazione);
+        if (cod_prenotazione != codice) {
+            new_data.push(prenotazioni[i]);
         }
     }
-    var newData = JSON.stringify(prenotazioni);
-    fs.writeFile('prodotti.json', newData, err => {
+
+    fs.writeFile('prenotazioni.json', JSON.stringify(new_data), err => {
         if (err) throw err;
     });
-    response.json("Prenotazione cancellata correttamente: " + prenotazioni.length);
+    response.json("Prenotazione cancellata correttamente!");
 }) 
