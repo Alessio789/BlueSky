@@ -151,7 +151,7 @@ test('TEST4: Prenotazione aggiunta correttamente', function (assert) {
 
 test('TEST5: Prenotazione cancellata correttamente', function (assert) {
     request(app)
-        .del('/api/prenotazione/3')
+        .del('/api/prenotazione/6')
         .expect("Content-Type", /json/)
         .end(function (err, res) {
             
