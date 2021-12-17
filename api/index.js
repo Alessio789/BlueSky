@@ -155,7 +155,7 @@ app.get('/api/ricercavoli', (request, response) => {
     //invio richiesta a SkyScanner
 
     var fs = require('fs');
-    var fileContents = fs.readFileSync('listavoli.json', 'utf8');
+    var fileContents = fs.readFileSync('json/listavoli.json', 'utf8');
 
     try {
         var data = JSON.parse(fileContents)
@@ -260,7 +260,7 @@ app.get('/api/ricercavoli', (request, response) => {
 app.get('/api/passeggeri', (request, response) => {
 
     const fs = require('fs');
-    var fileContents = fs.readFileSync('passeggeri.json', 'utf8');
+    var fileContents = fs.readFileSync('json/passeggeri.json', 'utf8');
 
     try {
         var data = JSON.parse(fileContents)
@@ -443,7 +443,7 @@ app.get('/api/passeggeri', (request, response) => {
 app.get("/api/prenotazioni", (request, response) => {
 
     const fs = require('fs');
-    var fileContents = fs.readFileSync('prenotazioni.json', 'utf8');
+    var fileContents = fs.readFileSync('json/prenotazioni.json', 'utf8');
 
     try {
         var data = JSON.parse(fileContents)
@@ -622,7 +622,7 @@ app.get("/api/prenotazioni", (request, response) => {
 app.post("/api/prenotazione", (request, response) => {
 
     const fs = require('fs');
-    var file_voli = fs.readFileSync('listavoli.json', 'utf8');
+    var file_voli = fs.readFileSync('json/listavoli.json', 'utf8');
 
     var lista_voli = JSON.parse(file_voli);
     var prenotazione = request.body;
@@ -643,7 +643,7 @@ app.post("/api/prenotazione", (request, response) => {
         }
     }
 
-    var in_prenotazioni = fs.readFileSync('prenotazioni.json', 'utf8');
+    var in_prenotazioni = fs.readFileSync('json/prenotazioni.json', 'utf8');
     var lista_prenotazioni = JSON.parse(in_prenotazioni);
 
     var cod_prenotazione = lista_prenotazioni[lista_prenotazioni.length - 1].cod_prenotazione + 1;
@@ -652,7 +652,7 @@ app.post("/api/prenotazione", (request, response) => {
 
     var output = JSON.stringify(lista_prenotazioni);
 
-    fs.writeFileSync('prenotazioni.json', output, 'utf8');
+    fs.writeFileSync('json/prenotazioni.json', output, 'utf8');
 
     response.status(201);
     response.json("Added Successfully");
@@ -680,7 +680,7 @@ app.post("/api/prenotazione", (request, response) => {
 */
 app.delete("/api/prenotazione/:codice", (request, response) => {
     const fs = require('fs');
-    var file_prenotazioni = fs.readFileSync('prenotazioni.json', 'utf8');
+    var file_prenotazioni = fs.readFileSync('json/prenotazioni.json', 'utf8');
     var prenotazioni = JSON.parse(file_prenotazioni);
     var codice = parseInt(request.params.codice);
     var new_data = [];
@@ -692,7 +692,7 @@ app.delete("/api/prenotazione/:codice", (request, response) => {
         }
     }
 
-    fs.writeFile('prenotazioni.json', JSON.stringify(new_data), err => {
+    fs.writeFile('json/prenotazioni.json', JSON.stringify(new_data), err => {
         if (err) throw err;
     });
     response.json("Prenotazione cancellata correttamente!");
